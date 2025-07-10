@@ -89,8 +89,34 @@ body {
     background-color: #357ABD;        /* Slightly darker on hover */
 }
 
+#schedule_div {
+
+    width: 30vw;
+}
+
 .schedule_table {
     width: 100%;
+    max-width: 30vw;
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    font-family: sans-serif;
+}
+
+#schedule_div {
+    width: 50vw;
+    overflow: hidden; /* Keeps the div tidy */
+}
+
+.table_wrapper {
+    overflow-x: auto; /* Enables horizontal scroll JUST for the table */
+    width: 100%;
+}
+
+.schedule_table {
+    width: max-content; /* Allows the table to expand naturally */
     border-collapse: collapse;
     text-align: center;
     table-layout: fixed;
