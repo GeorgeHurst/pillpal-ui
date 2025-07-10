@@ -94,3 +94,50 @@ function generateSchedule(data) {
 }
 
 
+function getData() {
+    fetch('http://localhost:5000/loadData')
+    .then(response => response.json())
+    .then(data => {fillSlots(data)/*; return data <-- does this work*/});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const editBtn = document.getElementById('edit_btn');
+    const pillDiv = document.getElementById('pill_div');
+
+    editBtn.addEventListener('click', () => {
+        pillDiv.classList.toggle('editing');
+        editBtn.textContent = pillDiv.classList.contains('editing') ? 'DONE' : 'EDIT';
+        
+    });
+
+    getData();
+
+    // This needs to be made specific for each info button
+    document.querySelectorAll('.info_btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            alert('Info: This is your pill information.');
+        });
+    });
+
+})
+
+function fillSlots(data) {
+ 
+    const slots = [
+        document.getElementById('pill_span1'),
+        document.getElementById('pill_span2'),
+        document.getElementById('pill_span3'),
+        document.getElementById('pill_span4')
+    ]
+
+    for (const slot in slots) {
+        slots[slot].innerText = (data.pills[slot].name) ? capitaliseFirstLetter(data.pills[slot].name) : "FREE SLOT"
+    }
+
+}
+
+
+function capitaliseFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+

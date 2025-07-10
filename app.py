@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import os, json
 from werkzeug.security import check_password_hash
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 with open('passcode.txt', 'r') as file:
     stored_hash = file.read().strip()
@@ -12,6 +14,10 @@ DATA_FILE = 'data.json'
 @app.route('/')
 def login():
     return render_template('login_page.html')
+
+@app.route('/standalone')
+def go_to_standalone():
+    return render_template('standalone.html')
 
 @app.route('/loadData', methods=['GET'])
 def get_data():
@@ -49,4 +55,4 @@ def check_passcode():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

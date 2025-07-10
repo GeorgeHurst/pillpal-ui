@@ -1,8 +1,124 @@
 body {
     font-family: monospace;
+    background-color: bisque;
 }
 
-.title {
+.title, h2 {
     text-decoration: underline;
 }
 
+
+#pill_div,
+#schedule_div {
+    position: fixed;
+    top: 20%;
+    width: 30%;
+}
+
+#pill_div {
+    left: 65%;
+}
+
+#schedule_div {
+    left: 2%;
+}
+
+
+
+.pill_slot {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%
+}
+
+.remove_btn {
+    visibility: hidden;
+    background: none;
+    border: none;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+
+.info_btn {
+    background: none;
+    border: none;
+    color: #4A90E2;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+
+
+#pill_div.editing .remove_btn {
+    visibility: visible;
+}
+
+.remove_btn:hover {
+    color: rgb(211,1,1);
+}
+
+.button {
+    background-color: #4A90E2;        /* Soft blue */
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 18px;
+}
+
+.button:hover {
+    background-color: #357ABD;        /* Slightly darker on hover */
+}
+
+.schedule_table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    font-family: sans-serif;
+}
+
+.schedule_table th,
+.schedule_table td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    height: 60px;
+    width: 120px;
+}
+
+.schedule_table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.schedule_table .slot {
+    background-color: #fff;
+    transition: background-color 0.2s;
+    height: 300px;
+}
+
+.schedule_table .slot:hover {
+    background-color: #e6f0ff;
+    cursor: pointer;
+}
