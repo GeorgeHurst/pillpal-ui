@@ -55,11 +55,14 @@ body {
     border: none;
     color: #4A90E2;
     font-size: 18px;
-    font-weight: bold;
+    /* Need to center text vertically */
     cursor: pointer;
     float: left;
     margin-left: 10px;
-    transition: color 0.2s;
+}
+
+.pill_slot span {
+    font-size: clamp(14px, 1.5vw, 18px);
 }
 
 
