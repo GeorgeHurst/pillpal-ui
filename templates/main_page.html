@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+
+    <link rel="stylesheet" href="../static/css/style_login.css">
+    <link rel="stylesheet" href="../static/css/style_main.css">
+</head>
+<body>
+
+    <button id="menuButton">☰</button>
+
+    <div id="sidePane">
+        <a href="/schedule">View schedule</a>
+        <a href="/managepills">View current pills</a>
+    </div>
+
+    <div id="time">Loading time...</div>
+
+    <br><br>
+    <div id="notification-div">
+        <h1>Notifications:</h1>
+        <ul>
+            <li>Your Paracetamol dose at 14:30 is now overdue! <button>Clear</button></li>
+            <li>Your Paracetamol dose at 16:30 is now due! <button>Clear</button></li>
+            <li>Your Paracetamol dose at 17:30 is due soon! <button>Clear</button></li>
+        </ul>
+    </div>
+
+    <br><br>
+    <div id="schedule-div">
+        <h1>Today's Schedule:</h1>
+        <ul>
+            <!-- <li id="paracetamol">Paracetamol x2 pills: 14:30 (<span class="time-diff"></span>)</li> -->
+            <li id="paracetamol">Paracetamol x2 pills: 14:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 15:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 16:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 17:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 18:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 19:30</li>
+            <li id="paracetamol">Paracetamol x2 pills: 20:30</li>
+
+        </ul>
+    </div>
+
+    <br><br>
+    <div id="counter-div">
+        <h1>Dosage Counter:</h1>
+        <p><span id="counter-ontime" class="counter-value">1</span> Dose(s) taken on time</p>
+        <p><span id="counter-late" class="counter-value">2</span> Dose(s) taken late</p>
+        <p><span id="counter-missed" class="counter-value">3</span> Dose(s) missed</p>
+    </div>
+
+
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

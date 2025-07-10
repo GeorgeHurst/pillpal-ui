@@ -1,0 +1,70 @@
+body {
+    background-color:rgb(0, 162, 211);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+html {
+    touch-action: manipulation; 
+}
+  
+
+#pinpad {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 30px;
+    padding: 10px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+#pinpad button {
+    font-size: 36px;
+    padding: 20px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px rgb(161, 161, 161);
+    width: 100px
+    
+}
+
+#pinpad button:active {
+    box-shadow: 0px 0px black;
+    transform: translate(5px, 5px);
+}
+
+#pinpad .text-button {
+    text-align: center;
+    font-size: 21px;
+}
+
+
+
+#input-bar {
+    position: relative;
+    width: 100%;
+    font-family: monospace;
+    margin: 0 auto;
+}
+  
+#pincode,
+.underscores {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    padding-left: 75px;
+    font-size: 50px;
+    white-space: nowrap;
+    /* text-align: center; */
+    width: 100%;
+    color: black;
+}
+
+
+
+
+  
+
+  

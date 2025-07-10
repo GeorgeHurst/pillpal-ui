@@ -1,0 +1,26 @@
+{
+    "userPreferences" : {
+        "activeHoursAM" : "07:30",
+        "activeHoursPM" : "21:30",
+        "theme" : "dark"
+    },
+
+    "pills": [
+        {
+            "name": "paracetamol",
+            "dosePerPill": 500,
+            "pillsPerDose": 2,
+            "dosesPerDay": 4,
+            "minHoursBetweenDoses": 4
+        },
+        {
+            "name": "ibuprofen",
+            "dosePerPill": 750,
+            "pillsPerDose": 1,
+            "dosesPerDay": 2,
+            "minHoursBetweenDoses": 8
+        }
+    ],
+
+    "schedule" : []
+}

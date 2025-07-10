@@ -1,0 +1,67 @@
+#time {
+    /* color: aliceblue; */
+    /* background-color: rgb(10, 39, 66); */
+    font-size: 36px;
+    padding: 5px;
+    margin: 0 auto;
+    width: max-content;
+    text-align: center;
+}
+
+#menuButton {
+    width: max-content;
+    height: max-content;
+    font-size: 40px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    border: 1px solid aliceblue;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+#sidePane {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease;
+}
+
+#sidePane a {
+    margin-left: 20px;
+    margin-top: 20px;
+    text-decoration: none;    
+    color: rgb(0, 162, 211);          
+    font-weight: bold;
+    font-size: 50px;
+
+}
+
+#sidePane a:hover {
+    color: rgb(0, 109, 143); 
+}
+
+#sidePane.open {
+    left: 0;
+    box-shadow: 20px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.counter-value {
+    font-weight: bolder;
+}
+
+
+div {
+    border: 1px solid rgb(255, 0, 0);
+}
+
+body {
+    background-color:rgb(0, 162, 211);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
