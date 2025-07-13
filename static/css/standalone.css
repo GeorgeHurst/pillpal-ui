@@ -26,8 +26,8 @@ body {
 
 
 .pill_slot {
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
+    background-color: #fef3e2;
+    border: 1px solid #d3c3ab;
     border-radius: 12px;
     padding: 12px 16px;
     margin: 10px 0;
@@ -35,6 +35,19 @@ body {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%
+}
+
+.edit_pill_btn {
+    visibility: hidden;
+    background: none;
+    border: none;
+    color: rgb(75, 182, 42);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    transition: color 0.2s;
 }
 
 .remove_btn {
@@ -49,6 +62,7 @@ body {
     margin-left: 10px;
     transition: color 0.2s;
 }
+
 
 .info_btn {
     background: none;
@@ -66,6 +80,7 @@ body {
 }
 
 
+#pill_div.editing .edit_pill_btn,
 #pill_div.editing .remove_btn {
     visibility: visible;
 }
@@ -104,19 +119,30 @@ body {
     text-align: center;
     table-layout: fixed;
     margin-top: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid #d3c3ab;
     font-family: sans-serif;
 }
 
 #schedule_div {
-    width: 50vw;
-    overflow: hidden; /* Keeps the div tidy */
+    height: 30vw;
+    /* overflow: hidden; */
 }
 
 .table_wrapper {
-    overflow-x: auto; /* Enables horizontal scroll JUST for the table */
-    width: 100%;
+    overflow: hidden; 
+    height: 100%;
 }
+
+.table_wrapper {
+  overflow: auto; /* Enables scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.table_wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, newer Edge */
+}
+
 
 .schedule_table {
     width: max-content; /* Allows the table to expand naturally */
@@ -124,25 +150,25 @@ body {
     text-align: center;
     table-layout: fixed;
     margin-top: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid #d3c3ab;
     font-family: sans-serif;
 }
 
 .schedule_table th,
 .schedule_table td {
-    border: 1px solid #ccc;
+    border: 1px solid #d3c3ab;
     padding: 12px;
     height: 60px;
-    width: 120px;
+    width: 180px;
 }
 
 .schedule_table th {
-    background-color: #f0f0f0;
+    background-color: #fef3e2;
     font-weight: bold;
 }
 
 .schedule_table .slot {
-    background-color: #fff;
+    background-color: #fef3e2;
     transition: background-color 0.2s;
     height: 300px;
 }
@@ -150,4 +176,17 @@ body {
 .schedule_table .slot:hover {
     background-color: #e6f0ff;
     cursor: pointer;
+}
+
+.settings {
+    background: none;
+    border: none;
+    color: #656666;
+    position: fixed;
+    top: 0%;
+    right: 1%;
+    font-size: 42px;
+    margin: 0 0 0 0;
+    padding: 10px 10px 10px 10px;
+    box-shadow: none;
 }

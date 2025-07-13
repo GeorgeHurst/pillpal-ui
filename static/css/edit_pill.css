@@ -1,0 +1,60 @@
+body {
+    font-family: monospace;
+    background-color: bisque; /* Light bisque background for a warm feel */
+}
+
+.edit_form {
+    background-color: #fef3e2; /* Light bisque variant for gentle contrast */
+    border: 2px solid #d3c3ab;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
+    font-family: monospace;
+    color: #333;
+}
+
+.edit_form h2 {
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 22px;
+    text-decoration: underline;
+}
+.edit_form p {
+    text-align: center;
+}
+
+.edit_form label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.edit_form input {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff8ee;
+    font-size: 15px;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+.edit_form button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #4A90E2;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+

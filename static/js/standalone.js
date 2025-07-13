@@ -1,5 +1,6 @@
-function generateSchedule(data) {
+var data;
 
+function generateSchedule(data) {
     const toMinutes = (timeStr) => {
         const [h, m] = timeStr.split(":").map(Number);
         return h * 60 + m;
@@ -28,37 +29,42 @@ function generateSchedule(data) {
         } = pill;
 
         const minInterval = minHoursBetweenDoses * 60;
-        const spacing = totalActiveMinutes / dosesPerDay;
+        const requiredTime = minInterval * (dosesPerDay - 1);
 
-        // Check if schedule is impossible for this pill
-        if (spacing < minInterval) {
+        // Human-friendly time format
+        const readableRequiredTime = requiredTime >= 60
+            ? `${(requiredTime / 60).toFixed(1)} hour${requiredTime >= 120 ? 's' : ''}`
+            : `${requiredTime} minute${requiredTime > 1 ? 's' : ''}`;
+
+        if (requiredTime > totalActiveMinutes) {
             skippedPills.push({
                 name,
-                reason: `Not enough active time (${totalActiveMinutes} mins) to fit ${dosesPerDay} doses with minimum ${minInterval} mins between doses.`
+                reason: `Need ${readableRequiredTime} between ${dosesPerDay} doses, but only ${totalActiveMinutes} minutes available.`
             });
-            continue; // Skip this pill
+            continue;
         }
 
+        // Schedule doses starting at active period start, spaced by minInterval
         let currentTime = start;
         for (let i = 0; i < dosesPerDay; i++) {
             if (currentTime > end) break;
 
             allDoses.push({
-                time: Math.round(currentTime),
+                time: currentTime,
                 pill: name,
                 amount: pillsPerDose
             });
 
-            currentTime += Math.max(minInterval, spacing);
+            currentTime += minInterval;
         }
     }
 
-    // Sort all doses by time
+    // Sort doses chronologically
     allDoses.sort((a, b) => a.time - b.time);
 
-    // Group doses that are within 10 minutes
-    const timeThreshold = 10;
+    // Group doses within timeThreshold minutes
     const groupedSchedule = [];
+    const timeThreshold = 10;
 
     for (const dose of allDoses) {
         const lastGroup = groupedSchedule[groupedSchedule.length - 1];
@@ -90,14 +96,18 @@ function generateSchedule(data) {
         })),
         skippedPills
     };
-
 }
 
 
-function getData() {
-    fetch('http://localhost:5000/loadData')
+function loadData() {
+    fetch('http://localhost:5000/load_data')
     .then(response => response.json())
-    .then(data => {fillSlots(data)/*; return data <-- does this work*/});
+    .then(data => {getData(data)});
+}
+
+
+function getData(_data) {
+   data = _data;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -110,32 +120,94 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
 
-    getData();
+    loadData();
+    fillSlots(data);
+    
 
     // This needs to be made specific for each info button
     document.querySelectorAll('.info_btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            alert('Info: This is your pill information.');
+            let id = btn.id[btn.id.length - 1];
+            alert(`Pill Name: ${capitaliseFirstLetter(data.pills[id].name)}\nDose per pill: ${data.pills[id].dosePerPill}mg\nPills per dose: ${data.pills[id].pillsPerDose}\nDoses per day: ${data.pills[id].dosesPerDay}\nMin time between doses: ${data.pills[id].minHoursBetweenDoses}hrs`);
+
         });
     });
 
-})
+    document.querySelectorAll('.edit_pill_btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let id = btn.id[btn.id.length - 1];
+            window.location = "/edit_pill/slot_" + (parseInt(id)+1);
+        });
+    });
 
-function fillSlots(data) {
- 
-    const slots = [
-        document.getElementById('pill_span1'),
-        document.getElementById('pill_span2'),
-        document.getElementById('pill_span3'),
-        document.getElementById('pill_span4')
-    ]
 
-    for (const slot in slots) {
-        slots[slot].innerText = (data.pills[slot].name) ? capitaliseFirstLetter(data.pills[slot].name) : "FREE SLOT"
+    // Loop through pill slots
+    for (let i = 0; i < 4; i++) {
+        const removeBtn = document.getElementById(`remove_pill_slot${i}`);
+        const span = document.getElementById(`pill_span${i}`);
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', () => {
+                console.log(`Clearing slot ${i}`);
+                const clearedData = {};
+
+                fetch(`/update_pill_data/${i}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(clearedData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        loadData();
+                        console.log(`Slot ${i} cleared successfully`);
+                    } else {
+                        console.error("Remove failed:", result.error);
+                    }
+                })
+                .catch(err => console.error("Network error:", err));
+            });
+        }
     }
 
-}
 
+    document.getElementById('update_schedule_btn').addEventListener('click', () => {
+        loadData();
+        const schedule = generateSchedule(data);
+        const scheduleDiv = document.getElementById('schedule_div');
+
+        // Clear existing schedule
+        scheduleDiv.innerHTML = '<h2>Schedule</h2><button id="update_schedule_btn" class="button">UPDATE</button><div class="table_wrapper"><table class="schedule_table"><thead><tr><th>Time</th><th>Pills</th></tr></thead><tbody></tbody></table></div>';
+
+        const tbody = scheduleDiv.querySelector('tbody');
+
+        // Populate new schedule
+        schedule.schedule.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${entry.time}</td><td>${entry.pills.map(p => `${capitaliseFirstLetter(p.name)} (${p.amount})`).join(', ')}</td>`;
+            tbody.appendChild(row);
+        });
+
+        // Handle skipped pills
+        if (schedule.skippedPills.length > 0) {
+            const skippedDiv = document.createElement('div');
+            skippedDiv.className = 'skipped_pills';
+            skippedDiv.innerHTML = '<h3>Skipped Pills</h3>';
+            skippedDiv.innerHTML += '<ul>' + schedule.skippedPills.map(p => `<li>${p.name}: ${p.reason}</li>`).join('') + '</ul>';
+            scheduleDiv.appendChild(skippedDiv);
+        }
+    });
+})
+
+
+function fillSlots(data) {
+    for (const pillIndex in data.pills) {
+        let name = data.pills[pillIndex].name;
+        document.getElementById(`pill_span${pillIndex}`).innerText = (name) ? capitaliseFirstLetter(name) : "FREE SLOT";
+    }
+}
 
 function capitaliseFirstLetter(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);

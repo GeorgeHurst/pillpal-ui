@@ -9,62 +9,45 @@
 </head>
 <body>
     <h1 class="title">Welcome to the PillPal web app</h1>
+    <button class="settings">⚙</button>
 
     <div id="schedule_div">
         <h2>Schedule</h2>
+        <button id="update_schedule_btn" class="button">LOAD SCHEDULE</button>
         <div class="table_wrapper">
-            <table class="schedule_table">
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                        <td class="slot">--</td>
-                    </tr>
-                </tbody>
-            </table>
+            <table class="schedule_table"></table>
         </div>
     </div>
     
     <div id="pill_div">
         <h2>Pills</h2>
-        <p id="pill_slot1" class="pill_slot">
+        <div id="pill_slot0" class="pill_slot">
+            <button id="info_btn0" class="info_btn" title="Click to see pill information">🛈</button>
+            <span id="pill_span0">FREE SLOT</span>
+            <button id="remove_pill_slot0" class="remove_btn" title = "Click to remove pill">X</button>
+            <button id="edit_pill0" class="edit_pill_btn" title="Click to edit pill information">🖉</button>
+        </div>
+        
+        <div id="pill_slot1" class="pill_slot">
             <button id="info_btn1" class="info_btn" title="Click to see pill information">🛈</button>
             <span id="pill_span1">FREE SLOT</span>
             <button id="remove_pill_slot1" class="remove_btn" title = "Click to remove pill">X</button>
-        </p>
+            <button id="edit_pill1" class="edit_pill_btn" title="Click to edit pill information">🖉</button>
+        </div>
         
-        <p id="pill_slot2" class="pill_slot">
+        <div id="pill_slot2" class="pill_slot">
             <button id="info_btn2" class="info_btn" title="Click to see pill information">🛈</button>
             <span id="pill_span2">FREE SLOT</span>
             <button id="remove_pill_slot2" class="remove_btn" title = "Click to remove pill">X</button>
-        </p>
+            <button id="edit_pill2" class="edit_pill_btn" title="Click to edit pill information">🖉</button>
+        </div>
         
-        <p id="pill_slot3" class="pill_slot">
+        <div id="pill_slot3" class="pill_slot">
             <button id="info_btn3" class="info_btn" title="Click to see pill information">🛈</button>
             <span id="pill_span3">FREE SLOT</span>
             <button id="remove_pill_slot3" class="remove_btn" title = "Click to remove pill">X</button>
-        </p>
-        
-        <p id="pill_slot4" class="pill_slot">
-            <button id="info_btn4" class="info_btn" title="Click to see pill information">🛈</button>
-            <span id="pill_span4">FREE SLOT</span>
-            <button id="remove_pill_slot4" class="remove_btn" title = "Click to remove pill">X</button>
-        </p>
+            <button id="edit_pill3" class="edit_pill_btn" title="Click to edit pill information">🖉</button>
+        </div>
         
         <button id="edit_btn" class="button">EDIT</button>
     </div>
@@ -72,5 +55,5 @@
     
     
     <script src="../static/js/standalone.js"></script>
+    </html>
 </body>
-</html>
